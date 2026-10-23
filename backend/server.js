@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -53,11 +54,11 @@ app.post('/api/send-otp', async (req, res) => {
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
     try {
-       /* await db.promise().query('DELETE FROM otp_verifications WHERE contact = ?', [trimmed]);
+        await db.promise().query('DELETE FROM otp_verifications WHERE contact = ?', [trimmed]);
         await db.promise().query(
             'INSERT INTO otp_verifications (contact, otp, expires_at) VALUES (?, ?, ?)',
             [trimmed, otp, expiresAt]
-        );*/
+        );
 
         if (/^\d{10}$/.test(trimmed)) {
             await twilioClient.messages.create({
